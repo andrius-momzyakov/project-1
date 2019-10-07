@@ -1,2 +1,2 @@
 # project-1
-Django-based typical web-application
+Django-based typical web-application's template project 

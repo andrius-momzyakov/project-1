@@ -20,7 +20,7 @@ from utils.portal_decorators import portalctx
 # Create your views here.
 
 
-class mirtaLoginView(LoginView):
+class mLoginView(LoginView):
 
     @portalctx
     def get_context_data(self, **kwargs):
@@ -41,7 +41,7 @@ class mirtaLoginView(LoginView):
         return context
 
 
-class mirtaPasswordContextMixin(PasswordContextMixin):
+class mPasswordContextMixin(PasswordContextMixin):
 
     @portalctx
     def get_context_data(self, **kwargs):
@@ -57,16 +57,16 @@ class mirtaPasswordContextMixin(PasswordContextMixin):
         return context
 
 
-class mirtaPasswordChangeDoneView(mirtaPasswordContextMixin, TemplateView):
+class mPasswordChangeDoneView(mPasswordContextMixin, TemplateView):
     template_name = 'registration/password_change_done.html'
     title = _('Password change successful')
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(mirtaPasswordChangeDoneView, self).dispatch(*args, **kwargs)
+        return super(mPasswordChangeDoneView, self).dispatch(*args, **kwargs)
 
 
-class mirtaPasswordChangeView(mirtaPasswordContextMixin, FormView):
+class mPasswordChangeView(mPasswordContextMixin, FormView):
     form_class = PasswordChangeForm
     success_url = reverse_lazy('password_change_done')
     template_name = 'registration/password_change_form.html'
@@ -76,10 +76,10 @@ class mirtaPasswordChangeView(mirtaPasswordContextMixin, FormView):
     @method_decorator(csrf_protect)
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(mirtaPasswordChangeView, self).dispatch(*args, **kwargs)
+        return super(mPasswordChangeView, self).dispatch(*args, **kwargs)
 
     def get_form_kwargs(self):
-        kwargs = super(mirtaPasswordChangeView, self).get_form_kwargs()
+        kwargs = super(mPasswordChangeView, self).get_form_kwargs()
         kwargs['user'] = self.request.user
         return kwargs
 
@@ -88,5 +88,5 @@ class mirtaPasswordChangeView(mirtaPasswordContextMixin, FormView):
         # Updating the password logs out all other sessions for the user
         # except the current one.
         update_session_auth_hash(self.request, form.user)
-        return super(mirtaPasswordChangeView, self).form_valid(form)
+        return super(mPasswordChangeView, self).form_valid(form)
 
