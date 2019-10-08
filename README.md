@@ -42,10 +42,10 @@ LOGOUT_REDIRECT_URL = '/'
 ```
 urlpatterns = [
     ...,
-    url(r'^login/$', mirtaLoginView.as_view(), name='login'),
+    url(r'^login/$', mLoginView.as_view(), name='login'),
     url(r'^logout/$', auth_views.LogoutView.as_view(), name='logout'),
-    url(r'^password_change/$', mirtaPasswordChangeView.as_view(), name='password_change'),
-    url(r'^password_change/done/$', mirtaPasswordChangeDoneView.as_view(), name='password_change_done'),
+    url(r'^password_change/$', mPasswordChangeView.as_view(), name='password_change'),
+    url(r'^password_change/done/$', mPasswordChangeDoneView.as_view(), name='password_change_done'),
     ...
 ]
 ```
