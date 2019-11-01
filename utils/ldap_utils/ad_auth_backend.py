@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import unicode_literals
+
 
 from . import authenticate, LDAP_INVALID_CREDENTIALS
 from ldap import SERVER_DOWN
@@ -59,7 +59,7 @@ class AdAuthBackend(object):
         '''.format(placeholders)
         conn = connection
         rows = Reporter.execute_sql(sql, connection=conn, params=model_codes)
-        app_codes = [v for v in [row.values() for row in rows]]
+        app_codes = [v for v in [list(row.values()) for row in rows]]
         return package_name in app_codes
 
     def has_perm(self, user_obj, perm, obj=None):

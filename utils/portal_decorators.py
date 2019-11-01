@@ -43,7 +43,7 @@ def has_all_roles(roles):
                 return func(*args, **kwargs)
             # print [i['name'] for i in rq.user.groups.values('name')]
             from portal.views import error
-            return error(rq, u'У Вас недосточно полномочий. Необходимо обратиться к администратору.',
+            return error(rq, 'У Вас недосточно полномочий. Необходимо обратиться к администратору.',
                          back_uri=rq.META.get('HTTP_REFERER'), **kwargs)
         return wrapper
 

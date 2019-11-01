@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals, division
+
 
 import uuid
 
@@ -21,7 +21,7 @@ except AttributeError:
 try:
     SERVER_NAME = settings.SERVER_NAME
 except AttributeError:
-    SERVER_NAME = u'http://127.0.0.1:8000'
+    SERVER_NAME = 'http://127.0.0.1:8000'
 
 # Create your models here.
 
@@ -51,11 +51,11 @@ class Comment(pm.ModelWithAuditFields):
 
     def notify(self):
         # print self.full_parent_url()
-        subject = u'Портал МИРТА: Требуется Ваше подтверждение.'
-        text = u'<html><p>Вы разместили комментарий на странице <a href="{}">{}</a>.</p>' +\
-        u'<p>Для активации комментария подтвердите его, перейдя по ссылке {}. </p>' +\
-        u'<p>Если данное уведомление пришло к Вам по ошибке, действий не требуется.</p>' +\
-        u'</html>'
+        subject = 'Портал МИРТА: Требуется Ваше подтверждение.'
+        text = '<html><p>Вы разместили комментарий на странице <a href="{}">{}</a>.</p>' +\
+        '<p>Для активации комментария подтвердите его, перейдя по ссылке {}. </p>' +\
+        '<p>Если данное уведомление пришло к Вам по ошибке, действий не требуется.</p>' +\
+        '</html>'
         text = text.encode('utf-8', 'ignore').format(self.full_parent_url(), self.full_parent_url(), self.confirm_url())
         sender = 'mirta@mts.ru'
         to = self.commenter_email

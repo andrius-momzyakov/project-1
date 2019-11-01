@@ -43,7 +43,7 @@ class PageNav:
         if self.current_page_num < PageNav.NUM_PAGES: self.current_page_num += 1
         return self.current_page_num
 
-    def next(self):
+    def __next__(self):
         if self.paginator_page.has_next():
             return {'pagenum': self.current_page_num + 1,
                     'pageurl': self.url_template.format(page=self.current_page_num + 1)}

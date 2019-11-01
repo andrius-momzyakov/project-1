@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals, division
+
 import datetime
 import re
 
 from django.conf import settings
 
-import models
+from . import models
 
 import uristat.exceptions
 

@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-from __future__ import division
+
 from django.shortcuts import render #, get_object_or_404
 from django.http import Http404
 import django.forms as forms
@@ -19,7 +19,7 @@ from utils.pagenav import PageNav
 import math
 
 NEWS_TABS_REFS = ['news_summary/', 'regional_news/', 'news_archive/']
-NEWS_TABS_REFS = map(lambda x: Section.PREFIX + x, NEWS_TABS_REFS)
+NEWS_TABS_REFS = [Section.PREFIX + x for x in NEWS_TABS_REFS]
 
 
 def news_matrix(news_list, entries_in_row):
@@ -70,18 +70,18 @@ def news_archive(request, uri_key='', context={}, prefix='', *args, **kwargs):
             super(DateSelectorForm, self).__init__(*args, **kwargs)
             years = [(d.year, str(d.year)) for d in NewsEntry.objects.filter(archive=True, publish=True). \
                 order_by('-day').dates('day', 'year')] + [(None, '--------')]
-            self.fields['year'] = forms.ChoiceField(label=u'Год', required=False, choices=years)
+            self.fields['year'] = forms.ChoiceField(label='Год', required=False, choices=years)
             months = [('{}/{}'.format(d.year, d.month), '{}/{}'.format(d.year, d.month)) for d in NewsEntry.objects. \
                 filter(archive=True, publish=True). \
                 order_by('-day').dates('day', 'month')] + [(None, '--------')]
-            self.fields['month'] = forms.ChoiceField(label=u'Месяц', required=False, choices=months)
+            self.fields['month'] = forms.ChoiceField(label='Месяц', required=False, choices=months)
             days = [(d, '{}/{}/{}'.format(d.year, d.month, d.day)) for d in NewsEntry.objects. \
                 filter(archive=True, publish=True). \
                 order_by('-day').dates('day', 'day')] + [(None, '--------')]
-            self.fields['date_from'] = forms.ChoiceField(label=u'Дата пуб. с', required=False, choices=days)
-            self.fields['date_to'] = forms.ChoiceField(label=u'до', required=False, choices=days)
+            self.fields['date_from'] = forms.ChoiceField(label='Дата пуб. с', required=False, choices=days)
+            self.fields['date_to'] = forms.ChoiceField(label='до', required=False, choices=days)
             sizes = ((10, '10'), (20, '20'), (None, '30'), (50, '50'), (100, '100') )
-            self.fields['page_size'] = forms.ChoiceField(label=u'Док.на стр.',
+            self.fields['page_size'] = forms.ChoiceField(label='Док.на стр.',
                                                          initial=None, #ITEMS_ON_PAGE,
                                                          choices=sizes, required=False
                                                          # validators=[validate_page_size]

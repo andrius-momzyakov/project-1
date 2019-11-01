@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-from __future__ import division, unicode_literals
+
 import sys, traceback
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import Http404
@@ -12,7 +12,7 @@ from django.http import HttpResponse, HttpResponseNotFound, HttpResponseServerEr
 from django.core.paginator import Paginator, EmptyPage
 from django.core.exceptions import ValidationError
 
-import models
+from . import models
 from .models import SiteReport, NewsEntry, SiteReportViewLock,\
                     Document, InfoSystem, SiteReportLoad, ManualNav, Section, PlainPage,\
                     OrgUnit
@@ -105,7 +105,7 @@ def news_view(request, id, context={}, *args, **kwargs):
     news = get_object_or_404(NewsEntry, pk=id)
     if not request.user.is_authenticated \
         and  not news.publish:
-        return error(request, text=u'Данная новость недоступна анонимным посетителям, так как не опубликована.',
+        return error(request, text='Данная новость недоступна анонимным посетителям, так как не опубликована.',
                      back_uri=back_uri)
         # all_published = NewsEntry.objects.filter(publish=True, archive=False)
     # context.update(published=all_published, news=news, back_uri=back_uri)

@@ -17,28 +17,28 @@ def news_to_top(modeladmin, request, queryset):
     for obj in queryset:
         obj.is_top = True
         obj.save()
-news_to_top.short_description = u'В Топ!'
+news_to_top.short_description = 'В Топ!'
 
 
 def news_from_top(modeladmin, request, queryset):
     for obj in queryset:
         obj.is_top = False
         obj.save()
-news_from_top.short_description = u'Из Топа'
+news_from_top.short_description = 'Из Топа'
 
 
 def news_to_archive(modeladmin, request, queryset):
     for obj in queryset:
         obj.archive = True
         obj.save()
-news_to_archive.short_description = u'В архив'
+news_to_archive.short_description = 'В архив'
 
 
 def news_from_archive(modeladmin, request, queryset):
     for obj in queryset:
         obj.archive = False
         obj.save()
-news_from_archive.short_description = u'Из архива'
+news_from_archive.short_description = 'Из архива'
 
 
 class NewsAdmin(admin.ModelAdmin):

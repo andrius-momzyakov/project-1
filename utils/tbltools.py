@@ -83,7 +83,7 @@ def apply_ordering_tools(request, qs=None, headers=[], order_session_var=''):
             if order_session_value:
                 del request.session[order_session_var]
             del get_params_dict['del_order_session_var']
-            redirect_url = '&'.join(['='.join([k, v]) for k, v in get_params_dict.items()])
+            redirect_url = '&'.join(['='.join([k, v]) for k, v in list(get_params_dict.items())])
             if redirect_url:
                 redirect_url = '?' + redirect_url
             redirect_url = request.path_info + redirect_url
@@ -115,7 +115,7 @@ def apply_ordering_tools(request, qs=None, headers=[], order_session_var=''):
         if get_params_dict.get('o'):
             del get_params_dict['o']
 
-        drop_order_url = '&'.join(['='.join([k, v]) for k, v in get_params_dict.items()])
+        drop_order_url = '&'.join(['='.join([k, v]) for k, v in list(get_params_dict.items())])
         if get_params_dict:
             drop_order_url = '?' + drop_order_url
         drop_order_url += '&del_order_session_var=true' if drop_order_url else '?del_order_session_var=true'
@@ -135,7 +135,7 @@ def apply_ordering_tools(request, qs=None, headers=[], order_session_var=''):
             order_params['keys'][colname] = order_param
         else:
             order_params['keys'][colname] = colname
-        order_params['keys'][colname] = '&'.join(['='.join([k, v]) for k, v in get_params_dict.items()] +
+        order_params['keys'][colname] = '&'.join(['='.join([k, v]) for k, v in list(get_params_dict.items())] +
                                         ['o={}'.format(order_params['keys'][colname])])
         if order_params['keys'][colname]:
             order_params['keys'][colname] = '?{}'.format(order_params['keys'][colname])

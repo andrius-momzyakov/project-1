@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals, division
+
 
 # Import smtplib for the actual sending function
 import smtplib, email
@@ -26,10 +26,10 @@ def notify(subject=None, text=None, sender=None, to=[]):
     try:
         s.sendmail(sender, to, msg.as_string())
     except smtplib.SMTPDataError as e:
-        print msg.as_string()
-        print 'SMTP:', e
+        print(msg.as_string())
+        print('SMTP:', e)
     except Exception as e:
-        print type(e), e.message
+        print(type(e), e.message)
     finally:
         s.quit()
 

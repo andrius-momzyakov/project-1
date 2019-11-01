@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+
 
 from django.shortcuts import render, get_object_or_404, redirect
 from django import forms
@@ -7,7 +7,7 @@ from django import forms
 # from ckeditor.fields import RichTextField
 from ckeditor.widgets import CKEditorWidget
 
-from models import Comment
+from .models import Comment
 from portal.views import error
 
 # Create your views here.
@@ -60,7 +60,7 @@ class EditCommentForm(forms.ModelForm):
         super(EditCommentForm, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control input-sm'
-        for key in self.fields.keys():
+        for key in list(self.fields.keys()):
             self.fields[key].widget.attrs['id'] = '{}_{}'.format(key, self.instance.pk)
 
     class Meta:
