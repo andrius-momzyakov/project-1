@@ -134,3 +134,39 @@ CKEDITOR_BROWSE_SHOW_DIRS = True
 CKEDITOR_IMAGE_BACKEND = 'Pillow'
 ...
 ```
+## Paginator usage by example 
+### in a template
+```
+        <table>
+        ...
+        </table>
+        {% include 'paginator.html' %}
+```
+### in a view
+```
+    ...
+    
+    qs = qs.order_by('fld1', ...)
+    pagenum = int(kwargs.get('pagenum', 1))
+    paginator = Paginator(qs, ITEMS_ON_PAGE,)
+    try:
+        paginator_page = paginator.page(pagenum) 
+    except EmptyPage:
+        pagenum = paginator.num_pages
+        paginator_page = paginator.page(pagenum)
+    try:
+        url_template = r'/' + Section.cleaned_prefix() + r'/{uri_key}/{pagenum}/' + qry
+        url_template = url_template.format(uri_key=uri_key, pagenum='{page}')  # для шаблона!
+        pagnav = PageNav(pagenum, paginator_page=paginator_page,
+                         url_template=url_template)
+    except ValueError:
+        raise Http404
+
+    context.update( ...
+        my_page_nav=pagnav, # paginator object
+        contracts=pagnav.paginator_page, # page of paginated queryset
+         ...
+    )
+
+    return render(request, 'report.html', context=context)
+```
