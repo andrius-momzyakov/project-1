@@ -5,7 +5,7 @@
     </div>
     <div class="panel-body">
         {% for entry in published %}
-            <div id="news_feed_entry_container_{{ entry.id }}" class="text-info text-left" >
+            <div id="news_feed_entry_container_{{ entry.id }}" class="text-info text-left" style="margin-bottom:10px">
                 <!--<div id="news_feed_entry_title_link_{{ entry.id }}" style="padding-left:15px; padding-right:5px;">-->
                 <div id="news_feed_entry_title_link_{{ entry.id }}">
                     <a class="text-muted" href="{{ entry.get_absolute_url }}"><b>

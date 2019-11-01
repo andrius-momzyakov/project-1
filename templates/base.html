@@ -37,7 +37,7 @@
         <div class="col-sm-9">
             <div class="text-center" style="display:inline-block; width:100%; height:78px;">
                 <h3  style="padding-top:25px; color:rgb(255,255,255); ">
-                    Многофункциональный Интерактивный Ресурс Технологической Аренды
+                    Заголовок
                 </h3>
 
             </div>
@@ -149,14 +149,14 @@
                                 {% if user.is_authenticated %}
                                     <li><a href="{% url 'logout' %}?next=/"><span class="oi oi-account-logout" title="Выйти" aria-hidden="true"></span></a></li>
                                     <li><a href="{% url 'password_change' %}?next=/"><span class="oi oi-key" title="Сменить пароль" aria-hidden="true"></span></a></li>
-                                    <li><a href="/portal/edo_report/"><b>Подключение к ЭДО</b></a></li>
+<!--                                    <li><a href="/portal/edo_report/"><b>Подключение к ЭДО</b></a></li>-->
                                 {% else %}
                                     <li><a href="{% url 'login' %}?next=/"><span class="oi oi-account-login" title="Войти" aria-hidden="true"></span></a></li>
                                 {% endif %}
                                 {% if user.is_superuser or user.is_staff %}
                                     <li><a href="/admin/"><span class="oi oi-cog" title="Админка" aria-hidden="true"></span></a></li>
-                                    <li><a href="/reporting/netcap/"><b>Данные по емкости сети</b></a></li>
-                                    <li><a href="/admin/portal/contractor/"><b>Контрагенты</b></a></li>
+<!--                                    <li><a href="/reporting/netcap/"><b>Данные по емкости сети</b></a></li>-->
+<!--                                    <li><a href="/admin/portal/contractor/"><b>Контрагенты</b></a></li>-->
                                 {% endif %}
                             </ul>
 
@@ -176,6 +176,7 @@
 </div>
 
 {% block content%}{% endblock %}
+
     {% if uristat_show %}
     <div id="uristat_container" class="text-muted small text-center" style="margin-top:5px; margin-bottom: 10px">К этой странице обратились <span class="badge">{{ uristat_cnt }}</span>{{ uristat_times_verbose }}.</div>
     {% endif %}
